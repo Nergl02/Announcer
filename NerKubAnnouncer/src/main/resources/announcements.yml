@@ -1,0 +1,86 @@
+# ===============================
+#  NerKubAnnouncer - ANNOUNCEMENTS
+# ===============================
+# Each announcement has:
+# - type: "chat" or "actionbar"
+# - message: A single string OR
+# - messages: A list of formatted strings (multiline chat messages)
+# - sound:
+#     name: Optional sound name to play (can be vanilla or namespaced)
+#     volume: (optional) Volume of the sound (default = 1.0)
+#     pitch: (optional) Pitch of the sound (default = 1.0)
+#
+# ✅ SUPPORTED FORMATTING:
+# &x        → Minecraft color codes (&a = green, &b = aqua, etc.)
+# <br>      → Line break (for chat messages only)
+# \n        → Line break (escaped, also supported)
+# <center>  → Centers the message line (first line only or multiple)
+# <hover[text]>target</hover> → Hover tooltip over text (chat only)
+# <click[url]>target</click>  → Clickable text (chat only)
+# <click[url]><hover[text]>target</hover></click> → Click + hover combo
+#
+# 🔊 SOUND SUPPORT:
+# You can play sounds with each announcement using:
+#   sound:
+#     name: BLOCK_NOTE_BLOCK_PLING
+#     volume: 1.5   # Optional (default: 1.0)
+#     pitch: 0.8    # Optional (default: 1.0)
+#
+# 💡 TIP: Use F3+T in-game to reload resource packs and test sounds.
+# 💡 Use names from https://minecraft.wiki/w/Sounds
+#
+# Example sounds:
+# - ENTITY_PLAYER_LEVELUP
+# - BLOCK_NOTE_BLOCK_PLING
+# - ENTITY_VILLAGER_YES
+# - ENTITY_EXPERIENCE_ORB_PICKUP
+# - UI_BUTTON_CLICK
+# - ENTITY_ARROW_HIT_PLAYER
+# - ENTITY_CAT_PURR
+#
+# 🧼 Use quotes for complex strings and NEVER use tabs!
+
+announcements:
+
+  discord:
+    type: chat
+    sound:
+      name: "ENTITY_PLAYER_LEVELUP"
+      volume: 1.0
+      pitch: 1.0
+    messages:
+      - " "
+      - "-----------------------------------------------------"
+      - "<center>&aThanks for playing!"
+      - "<center>&7Join our <click[https://discord.nerkub.cz]><hover[Click to open in browser]>&bDiscord</hover></click>&7!"
+      - "-----------------------------------------------------"
+      - " "
+
+  event:
+    type: actionbar
+    sound:
+      name: "ENTITY_EXPERIENCE_ORB_PICKUP"
+      volume: 1.0
+      pitch: 1.2
+    messages:
+      - "&eA new &6event &eis happening at spawn!"
+
+  ai_assistant:
+    type: chat
+    sound:
+      name: "ENTITY_VILLAGER_YES"
+    messages:
+      - "<center>&7Need help finding something?"
+      - "<center>&7Ask our &aAI Assistant&7!"
+      - "<center>&7Type &a@ai &7followed by your question."
+
+  hex_example:
+    type: chat
+    sound:
+      name: "BLOCK_NOTE_BLOCK_PLING"
+      volume: 1.2
+      pitch: 0.7
+    messages:
+      - "<center><#ff6600>🔥 This is a title in orange!"
+      - "<center><#66ccff>&7This line is light blue with a <hover[Hex hover!]>tooltip</hover>!"
+      - "<center><#00ff56>Click <click[https://example.com]><hover[Opens example.com]>here</hover></click><#00ff56> to visit."

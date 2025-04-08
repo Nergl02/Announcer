@@ -1,0 +1,14 @@
+name: NerKubAnnouncer
+version: '1.0.2'
+main: cz.nerkub.nerKubAnnouncer.NerKubAnnouncer
+api-version: '1.21'
+
+commands:
+  announcer:
+    description: Reloaduje NerKubAnnouncer plugin
+    usage: /<command> reload
+    permission: nerkubannouncer.reload
+
+permissions:
+  nerkubannouncer.reload:
+    default: op

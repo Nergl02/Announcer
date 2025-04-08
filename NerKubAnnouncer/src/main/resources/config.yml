@@ -1,0 +1,11 @@
+# ===============================
+#        NerKubAnnouncer - CONFIG
+# ===============================
+
+# Interval (in seconds) between each announcement.
+# Example: 60 = one message every 60 seconds
+announcement-interval: 60
+
+# If true → selects a random message from announcements.yml
+# If false → messages will be sent in the order they are defined
+random-order: true

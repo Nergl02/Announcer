@@ -1,0 +1,10 @@
+cz\nerkub\nerKubAnnouncer\commands\AnnouncerCommand.class
+cz\nerkub\nerKubAnnouncer\AnnouncementManager.class
+cz\nerkub\nerKubAnnouncer\NerKubAnnouncer.class
+cz\nerkub\nerKubAnnouncer\tasks\AnnouncementTask.class
+cz\nerkub\nerKubAnnouncer\commands\AnnouncerCommand$1.class
+cz\nerkub\nerKubAnnouncer\SoundData.class
+cz\nerkub\nerKubAnnouncer\AnnouncementManager$Announcement.class
+cz\nerkub\nerKubAnnouncer\utils\ConfigUpdater.class
+cz\nerkub\nerKubAnnouncer\utils\MessageFormatter.class
+cz\nerkub\nerKubAnnouncer\tasks\AnnouncementTask$1.class
