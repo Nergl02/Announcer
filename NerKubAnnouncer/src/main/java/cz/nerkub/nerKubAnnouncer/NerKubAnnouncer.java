@@ -3,31 +3,72 @@ package cz.nerkub.nerKubAnnouncer;
 import cz.nerkub.nerKubAnnouncer.commands.AnnouncerCommand;
 import cz.nerkub.nerKubAnnouncer.tasks.AnnouncementTask;
 import cz.nerkub.nerKubAnnouncer.utils.ConfigUpdater;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
+import java.util.Collections;
+import java.util.List;
 
 public class NerKubAnnouncer extends JavaPlugin {
 
 	private static NerKubAnnouncer instance;
 	private AnnouncementManager announcementManager;
 	private AnnouncementTask currentTask;
+	private CheckUpdatesGitHub checkUpdatesGitHub;
 
 	@Override
 	public void onEnable() {
 		instance = this;
+
+		// Config handling
 		saveDefaultConfig();
-		saveResource("announcements.yml", false);
-		ConfigUpdater.update(new File(getDataFolder(), "config.yml"), getResource("config.yml"));
-		ConfigUpdater.update(new File(getDataFolder(), "announcements.yml"), getResource("announcements.yml"));
+		handleFileUpdate("config.yml", Collections.emptyList());
+		handleFileUpdate("announcements.yml", Collections.singletonList("announcements"));
+
+		printStartupLogo();
 
 		this.announcementManager = new AnnouncementManager(this);
-		startAnnouncementTask(); // 🔄 správné spuštění tasku
+		startAnnouncementTask();
 
-		this.getCommand("announcer").setExecutor(new AnnouncerCommand());
+		checkUpdatesGitHub = new CheckUpdatesGitHub(this);
+		checkUpdatesGitHub.checkForUpdates();
 
-		getLogger().info("NerKubAnnouncer byl úspěšně zapnut!");
+		getServer().getPluginManager().registerEvents(new JoinListener(checkUpdatesGitHub), this);
+		getCommand("announcer").setExecutor(new AnnouncerCommand());
+
+		getLogger().info("NerKubAnnouncer has been enabled successfully!");
 	}
+
+	private void handleFileUpdate(String fileName, List<String> ignoredSections) {
+		File file = new File(getDataFolder(), fileName);
+
+		if (!file.exists()) {
+			saveResource(fileName, false);
+			getLogger().info("Created new " + fileName);
+		} else {
+			ConfigUpdater.update(file, getResource(fileName), ignoredSections);
+		}
+	}
+
+	private void printStartupLogo() {
+		String[] logo = {
+				"",
+				"&3|\\   |  | /    &aPlugin: &6NerKub Announcer",
+				"&3| \\  |  |/     &aVersion: &bv" + getDescription().getVersion(),
+				"&3|  \\ |  |\\    &aAuthor: &3NerKub Studio",
+				"&3|   \\|  | \\   &aPremium: &bThis plugin is a not premium resource.",
+				"",
+				"&3| Visit our Discord for more! &ahttps://discord.gg/YXm26egK6g",
+				""
+		};
+
+		for (String line : logo) {
+			Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', line));
+		}
+	}
+
 
 	@Override
 	public void onDisable() {

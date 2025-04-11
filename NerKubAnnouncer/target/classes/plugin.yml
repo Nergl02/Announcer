@@ -1,5 +1,5 @@
 name: NerKubAnnouncer
-version: '1.0.2'
+version: '1.0.4'
 main: cz.nerkub.nerKubAnnouncer.NerKubAnnouncer
 api-version: '1.21'
 
